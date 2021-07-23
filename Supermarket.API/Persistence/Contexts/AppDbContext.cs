@@ -32,8 +32,8 @@ namespace Supermarket.API.Persistence.Contexts
 
             modelBuilder.Entity<Category>().HasData
                 (
-                 new Category {  Name = "Fruit and Vegetables"},
-                 new Category { Name = "Dairy" }
+                 new Category { Id = 100, Name = "Fruit and Vegetables"},
+                 new Category { Id = 101, Name = "Dairy" }
                 );
 
 
