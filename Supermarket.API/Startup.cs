@@ -2,11 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Supermarket.API.Domain.Services;
+using Supermarket.API.Persistence.Contexts;
+using Supermarket.API.Persistence.Repositories;
+using Supermarket.API.Repositories;
+using Supermarket.API.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +34,14 @@ namespace Supermarket.API
         {
 
             services.AddControllers();
+            // Registering Database
+            var Conn = Configuration.GetConnectionString("SupermarketDatabase");
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(Conn));
+
+            //Registering Repositories and Services
+            services.AddScoped<ICategoryRespository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Supermarket.API", Version = "v1" });
