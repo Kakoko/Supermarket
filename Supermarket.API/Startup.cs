@@ -44,9 +44,9 @@ namespace Supermarket.API
             //Registering Repositories and Services
             services.AddScoped<ICategoryRespository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
-        
 
             services.AddSwaggerGen(c =>
             {

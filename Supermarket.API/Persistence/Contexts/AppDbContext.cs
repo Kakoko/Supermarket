@@ -26,7 +26,7 @@ namespace Supermarket.API.Persistence.Contexts
 
             modelBuilder.Entity<Category>().ToTable("Categories");
             modelBuilder.Entity<Category>().HasKey(p => p.Id);
-            modelBuilder.Entity<Category>().Property(p => p.Id).IsRequired().ValueGeneratedNever();
+            modelBuilder.Entity<Category>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Category>().Property(p => p.Name).IsRequired().HasMaxLength(30);
             modelBuilder.Entity<Category>().HasMany(p => p.Products).WithOne(p => p.Category).HasForeignKey(p => p.Id);
 

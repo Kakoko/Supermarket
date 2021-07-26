@@ -9,8 +9,8 @@ using Supermarket.API.Persistence.Contexts;
 namespace Supermarket.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210723104955_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210726184528_ImplementedPrimaryOnCategoriesTableNewDatabase")]
+    partial class ImplementedPrimaryOnCategoriesTableNewDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,9 @@ namespace Supermarket.API.Migrations
             modelBuilder.Entity("Supermarket.API.Domain.Models.Category", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
